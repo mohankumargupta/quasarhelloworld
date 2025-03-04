@@ -13,6 +13,8 @@ difference([1, 2, 3], [1, 2, 4]); // [3]
 `);
 const extensions = ref([javascript()]);
 const splitter = ref(50);
+
+const tabs = ref("preview");
 </script>
 
 
@@ -23,9 +25,6 @@ const splitter = ref(50);
     class="full-width"
   >
     <template #before>
-      left
-    </template>
-    <template #after>
       <code-mirror
         v-model="code"
         disabled
@@ -33,6 +32,26 @@ const splitter = ref(50);
         basic
         wrap
       />
+    </template>
+    <template #after>
+      <q-tabs
+        v-model="tabs"
+        dense
+        align="left"
+      >
+        <q-tab
+          name="preview"
+          label="Preview"
+        />
+        <q-tab
+          name="html"
+          label="HTML"
+        />
+        <q-tab
+          name="js"
+          label="Javascript"
+        />
+      </q-tabs>
     </template>
   </q-splitter>
 </template>
