@@ -52,6 +52,17 @@ const tabs = ref("preview");
           label="Javascript"
         />
       </q-tabs>
+      <q-tab-panels v-model="tabs">
+        <q-tab-panel name="preview">
+          PREVIEW
+        </q-tab-panel>
+        <q-tab-panel name="html">
+          HTML
+        </q-tab-panel>
+        <q-tab-panel name="js">
+          JS
+        </q-tab-panel>
+      </q-tab-panels>
     </template>
   </q-splitter>
 </template>
