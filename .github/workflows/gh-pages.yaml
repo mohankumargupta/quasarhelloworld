@@ -15,7 +15,6 @@ jobs:
       - name: Build static files
         id: build
         run: |
-          npm ci
           npm install -g @quasar/cli
           quasar build
 
