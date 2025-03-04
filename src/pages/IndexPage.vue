@@ -25,7 +25,7 @@ const tabs = ref("preview");
     class="full-width"
   >
     <template #before>
-      LEFT
+      LEFT PANE
     </template>
     <template #after>
       <q-tabs
