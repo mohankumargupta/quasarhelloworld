@@ -25,13 +25,7 @@ const tabs = ref("preview");
     class="full-width"
   >
     <template #before>
-      <code-mirror
-        v-model="code"
-        disabled
-        :extensions="extensions"
-        basic
-        wrap
-      />
+      LEFT
     </template>
     <template #after>
       <q-tabs
@@ -59,8 +53,17 @@ const tabs = ref("preview");
         <q-tab-panel name="html">
           HTML
         </q-tab-panel>
-        <q-tab-panel name="js">
-          JS
+        <q-tab-panel
+          class="full-width q-px-none q-py-md"
+          name="js"
+        >
+          <code-mirror
+            v-model="code"
+            disabled
+            :extensions="extensions"
+            basic
+            wrap
+          />
         </q-tab-panel>
       </q-tab-panels>
     </template>
