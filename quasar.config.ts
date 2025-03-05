@@ -2,6 +2,8 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers';
+//import {fileURLToPath, URL} from 'url';
+import {viteStaticCopy} from 'vite-plugin-static-copy';
 
 export default defineConfig((ctx) => {
   return {
@@ -62,7 +64,18 @@ export default defineConfig((ctx) => {
       // polyfillModulePreload: true,
       // distDir
 
-      // extendViteConf (viteConf) {},
+      extendViteConf (viteConf) {
+        viteConf.plugins = viteConf.plugins || [];
+        viteConf.plugins.push(
+          viteStaticCopy({
+            targets: [
+              {
+                src: 'bin/example.wasm',
+                dest: 'wasm-files'
+              }
+            ]
+          }));
+      },
       // viteVuePluginOptions: {},
 
       vitePlugins: [
@@ -72,7 +85,8 @@ export default defineConfig((ctx) => {
             lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{ts,js,mjs,cjs,vue}"',
             useFlatConfig: true
           }
-        }, { server: false }]
+        }, { server: false }],
+
       ]
     },
 
