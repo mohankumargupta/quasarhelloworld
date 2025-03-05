@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import CodeViewer from '../components/CodeViewer.vue';
-import BlocklyComponent from '../components/BlocklyComponent.vue';
+import BlocklyWorkspace from '../components/BlocklyWorkspace.vue';
 
 //import {javascriptGenerator} from 'blockly/javascript';
 
@@ -70,42 +70,7 @@ watch(splitterModel, (newVal) => emit('update:modelValue', newVal));
     class="full-width"
   >
     <template #before>
-      <BlocklyComponent id="blockly1">
-        <block type="controls_ifelse" />
-        <block type="logic_compare" />
-        <block type="logic_operation" />
-        <block type="controls_repeat_ext">
-          <value name="TIMES">
-            <shadow type="math_number">
-              <field name="NUM">
-                10
-              </field>
-            </shadow>
-          </value>
-        </block>
-        <block type="logic_operation" />
-        <block type="logic_negate" />
-        <block type="logic_boolean" />
-        <block
-          type="logic_null"
-          disabled="true"
-        />
-        <block type="logic_ternary" />
-        <block type="text_charAt">
-          <value name="VALUE">
-            <block type="variables_get">
-              <field name="VAR">
-                text
-              </field>
-            </block>
-          </value>
-        </block>
-      </BlocklyComponent>
-      <BlocklyComponent
-        id="blockly2"
-        ref="foo"
-        :options="options"
-      />
+      <BlocklyWorkspace/>
     </template>
     <template #after>
       <CodeViewer />
