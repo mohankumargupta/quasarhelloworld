@@ -2,7 +2,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers';
-//import {fileURLToPath, URL} from 'url';
+import {fileURLToPath, URL} from 'url';
 import {viteStaticCopy} from 'vite-plugin-static-copy';
 
 export default defineConfig((ctx) => {
@@ -70,8 +70,10 @@ export default defineConfig((ctx) => {
           viteStaticCopy({
             targets: [
               {
-                src: 'bin/example.wasm',
-                dest: 'wasm-files'
+                src: fileURLToPath(
+                  new URL('./node_modules/blockly/media/*', import.meta.url),
+                ),
+                dest: 'media',
               }
             ]
           }));
