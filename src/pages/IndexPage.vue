@@ -17,7 +17,6 @@ const splitter = ref(50);
 const tabs = ref("preview");
 </script>
 
-
 <template>
   <q-page />
   <q-splitter
