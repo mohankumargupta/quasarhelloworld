@@ -12,7 +12,7 @@
 
 import {onMounted, ref, shallowRef} from 'vue';
 import * as Blockly from 'blockly/core';
-//import * as En from 'blockly/msg/en';
+import * as En from 'blockly/msg/en';
 import 'blockly/blocks';
 
 //const props = defineProps(['options']);
@@ -23,11 +23,12 @@ const workspace = shallowRef();
 defineExpose({workspace});
 
 onMounted(() => {
-  //Blockly.setLocale(En);
+  Blockly.setLocale(En);
   // const options = props.options || {};
   // if (!options.toolbox) {
   //   options.toolbox = blocklyToolbox.value;
   // }
+
   const toolbox = blocklyToolbox.value;
   const zoom = {controls: true};
   workspace.value = Blockly.inject(blocklyDiv.value, {toolbox, zoom});
@@ -42,7 +43,7 @@ onMounted(() => {
     />
     <xml
       ref="blocklyToolbox"
-      style="display: none"
+      style="display: block"
     >
       <slot />
     </xml>
