@@ -71,37 +71,14 @@ import BlocklyComponent from '../components/BlocklyComponent.vue';
 </script>
 
 <template>
-  <div id="app">
-    <BlocklyComponent id="blockly1">
-      <block type="controls_ifelse" />
-      <block type="logic_compare" />
-      <block type="logic_operation" />
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <shadow type="math_number">
-            <field name="NUM">
-              10
-            </field>
-          </shadow>
-        </value>
-      </block>
-      <block type="logic_operation" />
-      <block type="logic_negate" />
-      <block type="logic_boolean" />
-      <block
-        type="logic_null"
-        disabled="true"
-      />
-      <block type="logic_ternary" />
-      <block type="text_charAt">
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR">
-              text
-            </field>
-          </block>
-        </value>
-      </block>
+    <BlocklyComponent id="blockly1" class="full-width">
+      <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+             <block type="controls_if"></block>
+             <block type="logic_compare"></block>
+             <block type="logic_operation"></block>
+             <block type="logic_negate"></block>
+             <block type="logic_boolean"></block>
+      </category>
     </BlocklyComponent>
 
     <!-- <BlocklyComponent
@@ -113,10 +90,23 @@ import BlocklyComponent from '../components/BlocklyComponent.vue';
       <button v-on:click="showCode()">Show JavaScript</button>
       <pre v-html="code"></pre>
     </div> -->
-  </div>
+
 </template>
 
-<style>
+<style scoped>
+
+html,
+body {
+  margin: 0;
+}
+
+#blockly1 {
+  height: 100vh;
+  display: flex;
+  width: 50%;
+}
+
+/*
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -154,4 +144,5 @@ body {
   width: 50%;
   height: 50%;
 }
+*/
 </style>
