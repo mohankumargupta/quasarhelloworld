@@ -4,7 +4,7 @@
 import { defineConfig } from '#q-app/wrappers';
 //import {fileURLToPath, URL} from 'url';
 import {viteStaticCopy} from 'vite-plugin-static-copy';
-import vue from '@vitejs/plugin-vue';
+//import vue from '@vitejs/plugin-vue';
 
 
 export default defineConfig((ctx) => {
@@ -70,25 +70,30 @@ export default defineConfig((ctx) => {
         // viteConf.resolve.alias = {
         //  '@': fileURLToPath(new URL('./src', import.meta.url)),}
         viteConf.plugins = viteConf.plugins || [];
-        viteConf.plugins.push(
-          vue({
-            template: {
-              compilerOptions: {
-                isCustomElement: (tag) =>
-                  [
-                    'field',
-                    'block',
-                    'category',
-                    'xml',
-                    'mutation',
-                    'value',
-                    'sep',
-                    'shadow',
-                  ].includes(tag),
-              },
-            },
-          })
-        );
+        //  viteConf.plugins.push(
+        //    vue({
+
+        //    })
+        //   );
+        // viteConf.plugins.push(
+        //   vue({
+        //     template: {
+        //       compilerOptions: {
+        //         isCustomElement: (tag) =>
+        //           [
+        //             'field',
+        //             'block',
+        //             'category',
+        //             'xml',
+        //             'mutation',
+        //             'value',
+        //             'sep',
+        //             'shadow',
+        //           ].includes(tag),
+        //       },
+        //     },
+        //   })
+        // );
         viteConf.plugins.push(
           viteStaticCopy({
             targets: [
@@ -99,7 +104,23 @@ export default defineConfig((ctx) => {
             ]
           }));
       },
-      // viteVuePluginOptions: {},
+      viteVuePluginOptions: {
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) =>
+              [
+                'field',
+                'block',
+                'category',
+                'xml',
+                'mutation',
+                'value',
+                'sep',
+                'shadow',
+              ].includes(tag),
+          },
+        }
+      },
 
       vitePlugins: [
         ['vite-plugin-checker', {
