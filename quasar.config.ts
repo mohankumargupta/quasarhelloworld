@@ -65,6 +65,8 @@ export default defineConfig((ctx) => {
       // distDir
 
       extendViteConf (viteConf) {
+        // viteConf.resolve.alias = {
+        //  '@': fileURLToPath(new URL('./src', import.meta.url)),}
         viteConf.plugins = viteConf.plugins || [];
         viteConf.plugins.push(
           viteStaticCopy({
