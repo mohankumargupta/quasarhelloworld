@@ -43,16 +43,18 @@ onMounted(() => {
 
 <template>
   <div>
+
     <div
       ref="blocklyDiv"
       class="blocklyDiv"
     />
     <xml
       ref="blocklyToolbox"
-      style="display: block"
+      style="display: none"
     >
       <slot />
     </xml>
+
   </div>
 </template>
 

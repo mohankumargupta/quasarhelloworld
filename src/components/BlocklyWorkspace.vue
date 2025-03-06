@@ -71,14 +71,46 @@ import BlocklyComponent from './BlocklyComponent.vue';
 </script>
 
 <template>
-    <BlocklyComponent id="blockly1" class="full-width">
-      <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+    <BlocklyComponent id="blockly1">
+      <category name="Logic" categorystyle="logic_category" >
              <block type="controls_if"></block>
              <block type="logic_compare"></block>
              <block type="logic_operation"></block>
              <block type="logic_negate"></block>
              <block type="logic_boolean"></block>
+             <block type="logic_null"></block>
+             <block type="logic_ternary"></block>
       </category>
+      <category name="Loops" categorystyle="loop_category">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+      <block type="controls_for">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_forEach"></block>
+      <block type="controls_flow_statements"></block>
+    </category>
+
     </BlocklyComponent>
 
     <!-- <BlocklyComponent
@@ -103,7 +135,7 @@ body {
 #blockly1 {
   height: calc(100dvh - 50px);
   display: flex;
-  width: 50%;
+  width: 100%;
 }
 
 /*
