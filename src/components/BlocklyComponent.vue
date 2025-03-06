@@ -59,10 +59,14 @@ onMounted(() => {
 </template>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .blocklyDiv {
   height: 100%;
   width: 100%;
   text-align: left;
+}
+
+.blocklyToolboxDiv {
+  padding-left: 0.25rem;
 }
 </style>
