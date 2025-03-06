@@ -101,7 +101,7 @@ body {
 }
 
 #blockly1 {
-  height: 100vh;
+  height: calc(100dvh - 50px);
   display: flex;
   width: 50%;
 }
