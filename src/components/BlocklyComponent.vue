@@ -31,7 +31,13 @@ onMounted(() => {
 
   const toolbox = blocklyToolbox.value;
   const zoom = {controls: true};
-  workspace.value = Blockly.inject(blocklyDiv.value, {toolbox, zoom});
+  const grid =   {
+            spacing: 25,
+            length: 3,
+            colour: '#ccc',
+            snap: true,
+          };
+  workspace.value = Blockly.inject(blocklyDiv.value, {grid, toolbox, zoom});
 });
 </script>
 
