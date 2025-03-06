@@ -1,7 +1,22 @@
 import * as Blockly from 'blockly/core';
 import { Order, javascriptGenerator } from 'blockly/javascript';
 
-let htmlGenerator = new Blockly.Generator('HTML');
+class HTMLGeneratorClass extends Blockly.Generator {
+  constructor() {
+    super('HTML');
+    this.forBlock = {}; // Initialize the forBlock property
+  }
+
+  // Optional: Override inherited methods if needed
+  override finish(code: string): string {
+    return code;
+  }
+
+
+}
+
+let htmlGenerator = new HTMLGeneratorClass();
+//let htmlGenerator = new Blockly.Generator('HTML');
 htmlGenerator['forBlock'] = {};
 
 // TODO: Use example from here: https://github.com/google/blockly-samples/blob/master/examples/sample-app-ts/src/generators/javascript.ts
@@ -66,14 +81,10 @@ const standard_blocks = [
 ];
 
 
-htmlGenerator.finish = function(code) {
-  return code;
-}
-
 for (const block of standard_blocks) {
   const forblock = javascriptGenerator.forBlock[block];
   if (forblock) {
-    htmlGenerator.forBlock[block] = forblock as unknown as (block: Blockly.Block, generator: Blockly.Generator) => string | [string, number] | null;
+    htmlGenerator.forBlock[block] = forblock as any;
   }
 }
 
