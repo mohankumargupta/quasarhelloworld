@@ -1,10 +1,26 @@
-import * as Blockly from 'blockly/core';
+//import * as Blockly from 'blockly/core';
+import { Names, Workspace, Generator } from 'blockly/core';
 import { Order, javascriptGenerator } from 'blockly/javascript';
 
-class HTMLGeneratorClass extends Blockly.Generator {
+class HTMLGeneratorClass extends Generator {
   constructor() {
     super('HTML');
     this.forBlock = {}; // Initialize the forBlock property
+  }
+
+  override init(workspace: Workspace) {
+    super.init(workspace);
+
+    if (!this.nameDB_) {
+      this.nameDB_ = new Names(this.RESERVED_WORDS_);
+    } else {
+      this.nameDB_.reset();
+    }
+
+    this.nameDB_.setVariableMap(workspace.getVariableMap());
+    this.nameDB_.populateVariables(workspace);
+    this.nameDB_.populateProcedures(workspace);
+
   }
 
   // Optional: Override inherited methods if needed
@@ -118,7 +134,13 @@ const standard_blocks = [
     "variables_get",
     "variables_set",
     "variables_get_dynamic",
-    "variables_set_dynamic"
+    "variables_set_dynamic",
+    "controls_if",
+    "controls_repeat_ext",
+    "controls_whileUntil",
+    "controls_for",
+    "controls_forEach",
+    "controls_flow_statements",
 ];
 
 
