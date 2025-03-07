@@ -58,10 +58,10 @@ export default defineConfig((ctx) => {
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
       publicPath: ctx.prod ? '/quasarhelloworld/' : '/',
-      alias: {
-        blocks: fileURLToPath(new URL('./src/blocks', import.meta.url)),
-        generators: fileURLToPath(new URL('./src/generators', import.meta.url)),
-      },
+      // alias: {
+      //   blocks: fileURLToPath(new URL('./src/blocks', import.meta.url)),
+      //   generators: fileURLToPath(new URL('./src/generators', import.meta.url)),
+      // },
       // analyze: true,
       // env: {},
       // rawDefine: {}
