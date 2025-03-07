@@ -12,10 +12,51 @@ class HTMLGeneratorClass extends Blockly.Generator {
     return code;
   }
 
+  /**
+   * Naked values are top-level blocks with outputs that aren't plugged into
+   * anything.  A trailing semicolon is needed to make this legal.
+   *
+   * @param line Line of generated code.
+   * @returns Legal line of code.
+   */
+  override scrubNakedValue(line: string): string {
+    return line + ';\n';
+  }
+
+  /**
+   * Encode a string as a properly escaped JavaScript string, complete with
+   * quotes.
+   *
+   * @param string Text to encode.
+   * @returns JavaScript string.
+   */
+  quote_(string: string): string {
+    // Can't use goog.string.quote since Google's style guide recommends
+    // JS string literals use single quotes.
+    string = string
+      .replace(/\\/g, '\\\\')
+      .replace(/\n/g, '\\\n')
+      .replace(/'/g, "\\'");
+    return "'" + string + "'";
+  }
+
+  /**
+   * Encode a string as a properly escaped multiline JavaScript string, complete
+   * with quotes.
+   * @param string Text to encode.
+   * @returns JavaScript string.
+   */
+  multiline_quote_(string: string): string {
+    // Can't use goog.string.quote since Google's style guide recommends
+    // JS string literals use single quotes.
+    const lines = string.split(/\n/g).map(this.quote_);
+    return lines.join(" + '\\n' +\n");
+  }
+
 
 }
 
-let htmlGenerator = new HTMLGeneratorClass();
+export const htmlGenerator = new HTMLGeneratorClass();
 //let htmlGenerator = new Blockly.Generator('HTML');
 htmlGenerator['forBlock'] = {};
 
@@ -213,3 +254,4 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
   const code = `on${event}="${handler}"`;
   return code;
 }
+

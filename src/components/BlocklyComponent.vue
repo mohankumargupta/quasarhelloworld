@@ -14,7 +14,8 @@ import {onMounted, ref, shallowRef} from 'vue';
 import * as Blockly from 'blockly/core';
 import * as En from 'blockly/msg/en';
 import 'blockly/blocks';
-import { javascriptGenerator } from 'blockly/javascript';
+//import { javascriptGenerator } from 'blockly/javascript';
+import { htmlGenerator } from '../generators/HTMLGenerator';
 //import 'blocks/custom_blocks';
 
 //const props = defineProps(['options']);
@@ -53,7 +54,7 @@ function updateCode(event: Blockly.Events.Abstract) {
   if (workspace.value.isDragging()) return; // Don't update while changes are happening.
   if (!supportedEvents.has(event.type)) return;
 
-  const code = javascriptGenerator.workspaceToCode(workspace.value);
+  const code = htmlGenerator.workspaceToCode(workspace.value);
   console.log(code);
 
 }
@@ -65,7 +66,6 @@ workspace.value.addChangeListener(updateCode);
 
 <template>
   <div>
-
     <div
       ref="blocklyDiv"
       class="blocklyDiv"
@@ -76,7 +76,6 @@ workspace.value.addChangeListener(updateCode);
     >
       <slot />
     </xml>
-
   </div>
 </template>
 
