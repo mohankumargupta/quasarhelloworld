@@ -2,7 +2,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers';
-//import {fileURLToPath, URL} from 'url';
+import {fileURLToPath, URL} from 'url';
 import {viteStaticCopy} from 'vite-plugin-static-copy';
 //import vue from '@vitejs/plugin-vue';
 
@@ -58,6 +58,10 @@ export default defineConfig((ctx) => {
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
       publicPath: ctx.prod ? '/quasarhelloworld/' : '/',
+      alias: {
+        blocks: fileURLToPath(new URL('./src/blocks', import.meta.url)),
+        generators: fileURLToPath(new URL('./src/generators', import.meta.url)),
+      },
       // analyze: true,
       // env: {},
       // rawDefine: {}
