@@ -14,6 +14,7 @@ import {onMounted, ref, shallowRef} from 'vue';
 import * as Blockly from 'blockly/core';
 import * as En from 'blockly/msg/en';
 import 'blockly/blocks';
+import { javascriptGenerator } from 'blockly/javascript';
 //import 'blocks/custom_blocks';
 
 //const props = defineProps(['options']);
@@ -39,6 +40,26 @@ onMounted(() => {
             snap: true,
           };
   workspace.value = Blockly.inject(blocklyDiv.value, {grid, toolbox, zoom});
+
+
+  const supportedEvents = new Set([
+  Blockly.Events.BLOCK_CHANGE,
+  Blockly.Events.BLOCK_CREATE,
+  Blockly.Events.BLOCK_DELETE,
+  Blockly.Events.BLOCK_MOVE,
+]);
+
+function updateCode(event: Blockly.Events.Abstract) {
+  if (workspace.value.isDragging()) return; // Don't update while changes are happening.
+  if (!supportedEvents.has(event.type)) return;
+
+  const code = javascriptGenerator.workspaceToCode(workspace.value);
+  console.log(code);
+
+}
+
+workspace.value.addChangeListener(updateCode);
+
 });
 </script>
 
