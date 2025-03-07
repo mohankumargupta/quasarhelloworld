@@ -17,20 +17,26 @@ import 'blockly/blocks';
 //import { javascriptGenerator } from 'blockly/javascript';
 import { htmlGenerator } from '../generators/HTMLGenerator';
 //import 'blocks/custom_blocks';
+import { state } from '../stores/codeStore';
 
 //const props = defineProps(['options']);
 const blocklyToolbox = ref();
 const blocklyDiv = ref();
 const workspace = shallowRef();
 
+
 defineExpose({workspace});
 
+//const blocklyCode = defineModel<string>();
+
 onMounted(() => {
-  Blockly.setLocale(En);
+
+  Blockly.setLocale(En); //eslint-disable-line
   // const options = props.options || {};
   // if (!options.toolbox) {
   //   options.toolbox = blocklyToolbox.value;
   // }
+
 
   const toolbox = blocklyToolbox.value;
   const zoom = {controls: true};
@@ -55,6 +61,8 @@ function updateCode(event: Blockly.Events.Abstract) {
   if (!supportedEvents.has(event.type)) return;
 
   const code = htmlGenerator.workspaceToCode(workspace.value);
+  state.blocklyCode = code;
+  //blocklyCode.value = code;
   console.log(code);
 
 }

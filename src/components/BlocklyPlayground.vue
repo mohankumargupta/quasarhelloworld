@@ -3,8 +3,11 @@
 import { ref } from 'vue';
 import CodeViewer from './CodeViewer.vue';
 import BlocklyWorkspace from './BlocklyWorkspace.vue';
+import { state } from '../stores/codeStore';
 
 const splitterModel = ref(50);
+//const blocklyCode = ref('boo');
+
 </script>
 
 <template>
@@ -16,7 +19,7 @@ const splitterModel = ref(50);
       <BlocklyWorkspace/>
     </template>
     <template #after>
-      <CodeViewer />
+      <CodeViewer/>
     </template>
   </q-splitter>
 </template>

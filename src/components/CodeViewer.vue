@@ -1,7 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import  CodeMirror from 'vue-codemirror6';
 import { javascript } from '@codemirror/lang-javascript';
+import { state } from '../stores/codeStore';
+
+const htmlCode = ref('');
+//const props = defineProps(['blocklyCode']);
+//htmlCode.value = props.blocklyCode.value;
+
+watch(() => state.blocklyCode, (newCode) => {
+  console.log('Code store updated:', newCode);
+  htmlCode.value = newCode;
+});
+// watch(() => props.blocklyCode.value, (newCode) => {
+//   console.log('Blockly code updated:', newCode);
+//   htmlCode.value = newCode;
+// });
+
+
+
+//const props = defineProps<{blockyCode: string}>();
+//const blocklyCode = props;
 
 const code = ref(
 `const difference = (a, b) => {
@@ -39,7 +58,14 @@ const tabs = ref("preview");
       PREVIEW
     </q-tab-panel>
     <q-tab-panel name="html">
-      HTML
+
+      <code-mirror
+        v-model="htmlCode"
+
+        :extensions="extensions"
+        basic
+        wrap
+      />
     </q-tab-panel>
     <q-tab-panel
       class="full-width q-px-none q-py-md"
