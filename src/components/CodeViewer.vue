@@ -5,12 +5,15 @@
  import { state } from '../stores/codeStore';
 
  const htmlCode = ref('');
+ const fullHTMLCode = ref('');
 //const props = defineProps(['blocklyCode']);
 //htmlCode.value = props.blocklyCode.value;
 
 watch(() => state.blocklyCode, (newCode) => {
   console.log('Code store updated:', newCode);
   htmlCode.value = newCode;
+  fullHTMLCode.value = renderHTML(newCode);
+  console.log('Full HTML:', fullHTMLCode.value);
 });
 
 const code = ref(
