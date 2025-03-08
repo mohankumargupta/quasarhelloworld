@@ -2,6 +2,7 @@
  import { ref, watch } from 'vue';
  import  CodeMirror from 'vue-codemirror6';
  import { javascript } from '@codemirror/lang-javascript';
+ import { html } from '@codemirror/lang-html';
  import { state } from '../stores/codeStore';
 
  const htmlCode = ref('');
@@ -16,6 +17,7 @@ watch(() => state.blocklyCode, (newCode) => {
   console.log('Full HTML:', fullHTMLCode.value);
 });
 
+/*
 const code = ref(
 `const difference = (a, b) => {
   const s = new Set(b);
@@ -24,7 +26,9 @@ const code = ref(
 
 difference([1, 2, 3], [1, 2, 4]); // [3]
 `);
+*/
 const extensions = ref([javascript()]);
+const htmlExtensions = ref([html()]);
 const tabs = ref("blocklycode");
 
 
@@ -38,13 +42,14 @@ const tabs = ref("blocklycode");
  function renderHTML(fragment: string): string {
   let fragment_trimmed = fragment.trim();
   if (!fragment_trimmed.startsWith('<')) {
-    fragment_trimmed = "<script>\n" + fragment_trimmed + "<\/script>\n";
+    fragment_trimmed = "<script>\n" + fragment_trimmed + "\n<\/script>";
   }
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Blockly Javascript</title>
   <meta charset="UTF-8">
-  <title>Rendered Document</title>
+  <meta name="viewport" content="width=device-width" />
 </head>
 <body>
 ${fragment_trimmed}
@@ -70,8 +75,8 @@ ${fragment_trimmed}
     />
 
     <q-tab
-      name="js"
-      label="Javascript"
+      name="fullhtml"
+      label="FullHTML"
     />
   </q-tabs>
   <q-tab-panels v-model="tabs">
@@ -90,12 +95,12 @@ ${fragment_trimmed}
     </q-tab-panel>
     <q-tab-panel
       class="full-width q-px-none q-py-md"
-      name="js"
+      name="fullhtml"
     >
       <code-mirror
-        v-model="code"
+        v-model="fullHTMLCode"
         disabled
-        :extensions="extensions"
+        :extensions="htmlExtensions"
         basic
         wrap
       />

@@ -13,9 +13,10 @@ const splitterModel = ref(50);
 <template>
   <q-splitter
     v-model="splitterModel"
-    class="full-width"
+    class="full-width flex"
   >
     <template #before>
+
       <BlocklyWorkspace/>
     </template>
     <template #after>
