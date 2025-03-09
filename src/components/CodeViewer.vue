@@ -30,7 +30,11 @@ difference([1, 2, 3], [1, 2, 4]); // [3]
 const extensions = ref([javascript()]);
 const htmlExtensions = ref([html()]);
 const tabs = ref("blocklycode");
+const isPreviewActive = ref(false);
 
+ function startPreview() {
+   isPreviewActive.value = true;
+ }
 
  function extractJavascript(html: string): string {
   const parser = new DOMParser();
@@ -90,8 +94,23 @@ ${fragment_trimmed}
         wrap
       />
     </q-tab-panel>
-    <q-tab-panel name="preview">
-      PREVIEW
+    <q-tab-panel name="preview" class="q-pa-md">
+      <div v-if="!isPreviewActive" class="flex flex-center items-center">
+        <q-btn
+        icon="play_arrow"
+        color="primary"
+        size="lg"
+        @click="startPreview"
+        aria-label="Start preview"
+      />
+      </div>
+      <div v-else >
+        <iframe
+          class="full-width"
+          :srcdoc="fullHTMLCode"
+          style="height: 100vh"
+        />
+      </div>
     </q-tab-panel>
     <q-tab-panel
       class="full-width q-px-none q-py-md"
