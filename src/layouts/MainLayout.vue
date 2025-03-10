@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+import { ref } from 'vue';
+function runCode() {
+  console.log('Running code');
+}
 </script>
 
 <template>
@@ -14,9 +17,18 @@
         />
 
         <q-toolbar-title>
-          Blockly Javascript
-        </q-toolbar-title>
 
+        </q-toolbar-title>
+        <q-space />
+
+        <q-btn
+          class="q-mr-md"
+          flat
+          dense
+          icon="play_arrow"
+          aria-label="Play"
+          @click="runCode"
+          />
         <span class="q-mr-md">BLOCKS</span>
         <span class="q-mr-md">CODE</span>
         <span>BOTH</span>

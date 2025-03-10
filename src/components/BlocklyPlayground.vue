@@ -3,10 +3,10 @@
 import { ref } from 'vue';
 import CodeViewer from './CodeViewer.vue';
 import BlocklyWorkspace from './BlocklyWorkspace.vue';
-import { state } from '../stores/codeStore';
+//import { state } from '../stores/codeStore';
 
 const splitterModel = ref(50);
-//const blocklyCode = ref('boo');
+
 
 </script>
 

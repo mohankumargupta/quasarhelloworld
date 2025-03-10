@@ -7,14 +7,15 @@
 
  const htmlCode = ref('');
  const fullHTMLCode = ref('');
+ const previewEnabled = ref(false);
 //const props = defineProps(['blocklyCode']);
 //htmlCode.value = props.blocklyCode.value;
 
 watch(() => state.blocklyCode, (newCode) => {
-  console.log('Code store updated:', newCode);
+  //console.log('Code store updated:', newCode);
   htmlCode.value = newCode;
   fullHTMLCode.value = renderHTML(newCode);
-  console.log('Full HTML:', fullHTMLCode.value);
+  //console.log('Full HTML:', fullHTMLCode.value);
 });
 
 /*
@@ -76,6 +77,7 @@ ${fragment_trimmed}
   <q-tab
       name="preview"
       label="Preview"
+      :disable="!previewEnabled"
     />
 
     <q-tab
