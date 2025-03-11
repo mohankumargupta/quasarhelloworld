@@ -282,9 +282,9 @@ import BlocklyComponent from './BlocklyComponent.vue';
       <block type="text_print"></block>
     </category>
     <category name="Elements" colour="rgb(0, 191, 186)">
-      <!-- <block type="elements_element_textcontent"></block> -->
+      <block type="elements_element_textcontent"></block>
       <block type="elements_script"></block>
-      <!-- <block type="elements_on"></block>  -->
+      <block type="elements_on"></block>
     </category>
 
     </BlocklyComponent>

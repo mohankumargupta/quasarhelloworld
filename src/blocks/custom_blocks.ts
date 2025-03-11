@@ -16,11 +16,81 @@ Blockly.Blocks['elements_script'] = {
       "nextStatement": null,
       "colour": "rgb(0, 191, 186)"
     });
+  }
+}
 
-//blockly convert to javascript from json
+Blockly.Blocks['elements_element_textcontent'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_element_textcontent",
+      "message0": "%1 element with text content \" %2 \"",
+      "args0": [
+          {
+              "type": "field_input",
+              "name": "TAG"
+          },
+          {
+              "type": "field_input",
+              "name": "TEXT"
+          }
+      ],
+      "message1": "attributes %1",
+      "args1": [
+          {
+              "type": "input_statement",
+              "name": "STATEMENT"
+          }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+
+    });
+  }
+}
+
+Blockly.Blocks['elements_on'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_on",
+      "message0": "on %1 do %2",
+      "args0": [
+          {
+              "type": "field_dropdown",
+              "name": "FIELDNAME",
+              "options": [
+                  ["click", "ITEM1"],
+                  ["double click", "ITEM2"]
+               ]
+          },
+          {
+              "type": "input_value",
+              "name": "EVENTHANDLER",
+          }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(254, 214, 81)"
+
+    });
+  }
+}
+
+
 /*
-      "type": "elements_script",
-      "message0": "script element",
+Blockly.Blocks['functions_def'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "functions_def",
+      "message0": "def %1",
+      "args0": [
+          {
+              "type": "field_input",
+              "name": "TEXT",
+              "check": "String"
+          }
+      ],
       "message1": "%1",
       "args1": [
           {
@@ -28,14 +98,15 @@ Blockly.Blocks['elements_script'] = {
               "name": "STATEMENTS"
           }
       ],
+      "inputsInline": true,
       "previousStatement": null,
       "nextStatement": null,
-      "colour": "rgb(0, 191, 186)"
-*/
+      "colour": "%{BKY_PROCEDURES_HUE}"
 
-
+    });
   }
 }
+*/
 
 /*
 Blockly.common.defineBlocksWithJsonArray([
