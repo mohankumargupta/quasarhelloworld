@@ -27,7 +27,9 @@ function stackblitz(evt: Event) {
   },
 {
   openFile: ['index.css,index.js,index.html'],
-
+  showSidebar: false,
+  zenMode: true,
+  devToolsHeight: 50,
 }
 );
 }
