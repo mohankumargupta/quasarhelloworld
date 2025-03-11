@@ -26,7 +26,7 @@ function stackblitz(evt: Event) {
  description: 'Blockly Code',
   },
 {
-  openFile: ['index.html'],
+  openFile: ['index.css,index.js,index.html'],
 
 }
 );
