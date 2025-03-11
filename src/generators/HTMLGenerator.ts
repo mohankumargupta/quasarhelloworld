@@ -278,7 +278,16 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
   const field: keyof typeof eventMap = block.getFieldValue('FIELDNAME') || "ITEM1";
   const event = eventMap[field] || "click";
   const handler = generator.valueToCode(block, 'EVENTHANDLER', Order.ATOMIC) || "";
-  const code = `on${event}="${handler}"`;
+  let code = `on${event}="${handler}"`;
+
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (nextBlock) {
+      // Recursively generate code for the next block
+      const nextCode = generator.blockToCode(nextBlock);
+      code += `${nextCode} `; // Append the generated code for the next block
+    }
+
+
   return code;
 }
 
