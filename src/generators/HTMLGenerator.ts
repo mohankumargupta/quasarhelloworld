@@ -181,59 +181,14 @@ htmlGenerator.forBlock['functions_def'] = function(block, generator) {
 
 htmlGenerator.forBlock['elements_element_textcontent'] = function(block, generator) {
   const tag = block.getFieldValue('TAG') || "";
-  const textContent: keyof typeof eventMap = block.getFieldValue('TEXT') as keyof typeof eventMap || "";
-  //let code = `<${tag}>${eventName}</${tag}>\n`;
-
-    // Generate code for the input value (the "do" part)
-  const actionCode = generator.valueToCode(
-    block,
-    'TEXT',
-    Order.ATOMIC
-  ) || 'null'; // Default to 'null' if no input is provided
-
-  // Map ITEM1/ITEM2 to actual event names
-  const eventMap = {
-    'ITEM1': 'click',
-    'ITEM2': 'dblclick' // Use standard DOM event names
-  };
-  const eventType = eventMap[textContent] || 'click';
-
-  const inputString = generator.statementToCode(block, 'STATEMENT') || "";
-  const attributes = inputString.split(/\s+/);
-
-  const processedAttributes = attributes.map(attr => {
-      if (attr === '') {
-        return '';
-      }
-      const match = attr.match(/^on(\w+)="([^"]+)"$/);
-      if (!match) {
-        throw new Error(`Invalid attribute format: ${attr}`);
-      }
-
-      const eventKey = match[1];
-      const functionCall = match[2];
-
-      const domEventName = eventKey ? eventMap[eventKey as keyof typeof eventMap] : undefined;
-      if (!domEventName) {
-        throw new Error(`No mapping found for event key: ${eventKey}`);
-      }
-
-
-  return `on${domEventName}="${functionCall}"`;
-    });
-
-// Step 3: Join the processed attributes back into a single string
-const result = processedAttributes.join(' ');
-
-  let code = `<${tag} ${result}>${textContent}</${tag}>\n`;
-
+  const textContent = block.getFieldValue('TEXT')|| "";
+  const actionCode = generator.statementToCode(block,'STATEMENT') || '';
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
   if (nextBlock) {
-      // Recursively generate code for the next block
-      const nextCode = generator.blockToCode(nextBlock);
-      code += nextCode; // Append the generated code for the next block
-    }
-
+      nextCode  = generator.blockToCode(nextBlock) as string;
+  }
+  const code = `<${tag}${actionCode}>${textContent}</${tag}>\n`;
   return code;
 }
 
@@ -284,7 +239,7 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
   if (nextBlock) {
       // Recursively generate code for the next block
       const nextCode = generator.blockToCode(nextBlock);
-      code += `${nextCode} `; // Append the generated code for the next block
+      code += ` ${nextCode}`; // Append the generated code for the next block
     }
 
 
