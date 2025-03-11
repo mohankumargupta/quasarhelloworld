@@ -271,7 +271,12 @@ Blockly.JavaScript['elements_on'] = function(block) {
 */
 
 htmlGenerator.forBlock['elements_on'] = function(block, generator) {
-  const event = block.getFieldValue('FIELDNAME') || "";
+  const eventMap = {
+    'ITEM1': 'click',
+    'ITEM2': 'dblclick' // Use standard DOM event names
+  };
+  const field: keyof typeof eventMap = block.getFieldValue('FIELDNAME') || "ITEM1";
+  const event = eventMap[field] || "click";
   const handler = generator.valueToCode(block, 'EVENTHANDLER', Order.ATOMIC) || "";
   const code = `on${event}="${handler}"`;
   return code;
