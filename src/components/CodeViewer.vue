@@ -7,14 +7,36 @@
 
  const htmlCode = ref('');
  const fullHTMLCode = ref('');
- const previewEnabled = ref(false);
+ const previewEnabled = ref(true);
+ const iframeHTML = ref('')
 //const props = defineProps(['blocklyCode']);
 //htmlCode.value = props.blocklyCode.value;
+
+function changeCode(newCode: string) {
+  htmlCode.value = newCode;
+  fullHTMLCode.value = renderHTML(newCode);
+  iframeHTML.value = newCode;
+  const scriptTaginHTML = bodyHasNonScriptTags(fullHTMLCode.value);
+  if (!scriptTaginHTML) {
+     iframeHTML.value = `<script>${newCode.replaceAll("\n","")}<\/script>`;
+  } else {
+    iframeHTML.value = newCode;
+  }
+
+}
+
 
 watch(() => state.blocklyCode, (newCode) => {
   //console.log('Code store updated:', newCode);
   htmlCode.value = newCode;
   fullHTMLCode.value = renderHTML(newCode);
+  iframeHTML.value = newCode;
+  const scriptTaginHTML = bodyHasNonScriptTags(fullHTMLCode.value);
+  if (!scriptTaginHTML) {
+     iframeHTML.value = `<script>${newCode.replaceAll("\n","")}<\/script>`;
+  } else {
+    iframeHTML.value = newCode;
+  }
   //console.log('Full HTML:', fullHTMLCode.value);
 });
 
@@ -62,9 +84,52 @@ ${fragment_trimmed}
 </html>`;
 }
 
+function bodyHasNonScriptTags(htmlString: string): boolean {
+  try {
+    // Create a DOM parser
+    const parser = new DOMParser();
+
+    // Parse the HTML string
+    const doc = parser.parseFromString(htmlString, 'text/html');
+
+    // Get the body element
+    const body = doc.body;
+
+    if (!body) return false;
+
+    // Get all direct and indirect children of the body
+    const allElements = body.getElementsByTagName('*');
+
+    // Check if there's at least one element that is not a script
+    for (let i = 0; i < allElements.length; i++) {
+      if (allElements[i]?.tagName.toLowerCase() !== 'script') {
+        return true;
+      }
+    }
+
+    // Check if body has text content directly (not within any tag)
+    const textNodes = Array.from(body.childNodes || [])
+      .filter((node): node is Text =>
+         node.nodeType === Node.TEXT_NODE &&
+         typeof node.textContent &&
+         typeof node.textContent === 'string')
+      .some(node => node.textContent && node.textContent.trim().length > 0);
+
+  if (textNodes) {
+    return true;
+  }
+    // If we get here, the body either has no elements or only has script elements
+    return false;
+  } catch (error) {
+    console.error('Error parsing HTML:', error);
+    return false;
+  }
+}
+
 </script>
 
 <template>
+
   <q-tabs
     v-model="tabs"
     dense
@@ -97,6 +162,7 @@ ${fragment_trimmed}
       />
     </q-tab-panel>
     <q-tab-panel name="preview" class="q-pa-md">
+      <!--<iframe style="visibility: hidden;width: 0; height: 0; border: 0; border: none; position: absolute;"></iframe>-->
       <div v-if="!isPreviewActive" class="flex flex-center items-center">
         <q-btn
         icon="play_arrow"
@@ -109,7 +175,7 @@ ${fragment_trimmed}
       <div v-else >
         <iframe
           class="full-width"
-          :srcdoc="fullHTMLCode"
+          :srcdoc="iframeHTML"
           style="height: 100vh"
         />
       </div>
