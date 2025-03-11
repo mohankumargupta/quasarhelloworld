@@ -78,7 +78,7 @@ Blockly.Blocks['elements_on'] = {
 }
 
 
-/*
+
 Blockly.Blocks['functions_def'] = {
   init: function() {
     this.jsonInit({
@@ -106,7 +106,26 @@ Blockly.Blocks['functions_def'] = {
     });
   }
 }
-*/
+
+
+Blockly.Blocks['functions_call'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "functions_call",
+      "message0": "call %1",
+      "args0": [
+          {
+              "type": "field_input",
+              "name": "TEXT",
+              "check": "String"
+          }
+      ],
+      "inputsInline": true,
+      "output": "String",
+      "colour": "%{BKY_PROCEDURES_HUE}",
+    });
+  }
+}
 
 /*
 Blockly.common.defineBlocksWithJsonArray([

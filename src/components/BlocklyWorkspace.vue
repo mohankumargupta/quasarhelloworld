@@ -277,7 +277,11 @@ import BlocklyComponent from './BlocklyComponent.vue';
     </category>
     <sep></sep>
     <category name="Variables" categorystyle="variable_category" custom="VARIABLE"></category>
-    <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE"></category>
+    <category name="Functions" categorystyle="procedure_category">
+      <block type="functions_def"></block>
+      <block type="functions_call"></block>
+    </category>
+    <!-- <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE"></category> -->
     <category name="Output" colour="rgb(144, 0, 144)">
       <block type="text_print"></block>
     </category>
