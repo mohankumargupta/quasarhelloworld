@@ -12,6 +12,10 @@
 //const props = defineProps(['blocklyCode']);
 //htmlCode.value = props.blocklyCode.value;
 
+function stackblitz(evt: Event) {
+  console.log("stackblitz");
+}
+
 function changeCode(newCode: string) {
   htmlCode.value = newCode;
   fullHTMLCode.value = renderHTML(newCode);
@@ -129,7 +133,7 @@ function bodyHasNonScriptTags(htmlString: string): boolean {
 </script>
 
 <template>
-
+ <div>
   <q-tabs
     v-model="tabs"
     dense
@@ -149,7 +153,9 @@ function bodyHasNonScriptTags(htmlString: string): boolean {
       name="fullhtml"
       label="FullHTML"
     />
+    <q-btn class="q-mx-md" color="deep-orange" label="Edit Code" glossy icon="fa-solid fa-arrow-up-right-from-square" @click="stackblitz"></q-btn>
   </q-tabs>
+</div>
   <q-tab-panels v-model="tabs">
     <q-tab-panel name="blocklycode">
 
