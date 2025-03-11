@@ -16,7 +16,7 @@ import * as En from 'blockly/msg/en';
 import 'blockly/blocks';
 //import { javascriptGenerator } from 'blockly/javascript';
 import { htmlGenerator } from '../generators/HTMLGenerator';
-//import 'blocks/custom_blocks';
+import '../blocks/custom_blocks';
 import { state } from '../stores/codeStore';
 
 //const props = defineProps(['options']);

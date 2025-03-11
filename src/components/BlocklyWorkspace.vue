@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+//import { ref } from 'vue';
 import BlocklyComponent from './BlocklyComponent.vue';
-import { state } from '../stores/codeStore';
+//import { state } from '../stores/codeStore';
 
 </script>
 
@@ -280,6 +280,11 @@ import { state } from '../stores/codeStore';
     <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE"></category>
     <category name="Output" colour="rgb(144, 0, 144)">
       <block type="text_print"></block>
+    </category>
+    <category name="Elements" colour="rgb(0, 191, 186)">
+      <!-- <block type="elements_element_textcontent"></block> -->
+      <block type="elements_script"></block>
+      <!-- <block type="elements_on"></block>  -->
     </category>
 
     </BlocklyComponent>

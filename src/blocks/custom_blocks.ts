@@ -1,5 +1,43 @@
 import * as Blockly from 'blockly/core';
 
+Blockly.Blocks['elements_script'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_script",
+      "message0": "script element",
+      "message1": "%1",
+      "args1": [
+          {
+              "type": "input_statement",
+              "name": "STATEMENTS"
+          }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+    });
+
+//blockly convert to javascript from json
+/*
+      "type": "elements_script",
+      "message0": "script element",
+      "message1": "%1",
+      "args1": [
+          {
+              "type": "input_statement",
+              "name": "STATEMENTS"
+          }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+*/
+
+
+  }
+}
+
+/*
 Blockly.common.defineBlocksWithJsonArray([
   {
       "type": "functions_def",
@@ -113,3 +151,4 @@ Blockly.common.defineBlocksWithJsonArray([
       "colour": "rgb(254, 214, 81)"
   }
 ]);
+*/

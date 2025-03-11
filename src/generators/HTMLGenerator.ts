@@ -168,7 +168,7 @@ htmlGenerator.forBlock['output_alert'] = function(block, generator) {
 
 htmlGenerator.forBlock['elements_script'] = function(block, generator) {
     const innerHTMLContent = generator.statementToCode(block, 'STATEMENTS') || "";
-    const code = `<script>\n${innerHTMLContent}</script>`;
+    const code = `<script>\n${innerHTMLContent}<\/script>`;
     return code;
 }
 
