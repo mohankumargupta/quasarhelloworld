@@ -4,6 +4,7 @@
  import { javascript } from '@codemirror/lang-javascript';
  import { html } from '@codemirror/lang-html';
  import { state } from '../stores/codeStore';
+ import sdk from '@stackblitz/sdk';
 
  const htmlCode = ref('');
  const fullHTMLCode = ref('');
@@ -14,6 +15,21 @@
 
 function stackblitz(evt: Event) {
   console.log("stackblitz");
+  sdk.openProject({
+ files: {
+  'index.html': fullHTMLCode.value,
+  'index.css': 'body { background-color: #f0f; }',
+  'index.js': 'console.log("Hello from JavaScript");'
+ },
+ template: 'javascript',
+ title: 'Blockly Code',
+ description: 'Blockly Code',
+  },
+{
+  openFile: ['index.html'],
+
+}
+);
 }
 
 function changeCode(newCode: string) {
