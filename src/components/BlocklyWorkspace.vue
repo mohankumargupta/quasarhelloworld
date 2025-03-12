@@ -295,6 +295,10 @@ import BlocklyComponent from './BlocklyComponent.vue';
       <block type="elements_script"></block>
       <block type="elements_on"></block>
     </category>
+    <category name="Scripts" colour="rgb(187, 102, 202)">
+      <block type="scripts_setqueryselector"></block>
+      <block type="scripts_queryselector"></block>
+    </category>
 
     </BlocklyComponent>
 

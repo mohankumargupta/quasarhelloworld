@@ -152,6 +152,50 @@ Blockly.Blocks['functions_def'] = {
 }
 
 
+Blockly.Blocks['scripts_queryselector'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "scripts_queryselector",
+      "message0": "element matching selector %1",
+      "args0": [
+          {
+              "type": "input_value",
+              "name": "TEXT",
+              "check": "String"
+          }
+      ],
+      "inputsInline": true,
+      "output": "String",
+      "colour": "rgb(187, 102, 202)",
+    });
+  }
+}
+
+Blockly.Blocks['scripts_setqueryselector'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "scripts_setqueryselector",
+      "message0": "for element %1 set text content to %2",
+      "args0": [
+          {
+              "type": "input_value",
+              "name": "QUERY",
+              "check": "String"
+          },
+          {
+              "type": "input_value",
+              "name": "TEXT",
+              "check": "String"
+          }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(187, 102, 202)",
+    });
+  }
+}
+
 Blockly.Blocks['functions_call'] = {
   init: function() {
     this.jsonInit({

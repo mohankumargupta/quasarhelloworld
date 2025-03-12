@@ -212,6 +212,20 @@ htmlGenerator.forBlock['functions_call'] = function(block, generator) {
   return [code, Order.ATOMIC];
 }
 
+htmlGenerator.forBlock['scripts_queryselector'] = function(block, generator) {
+  //const function_name = block.getFieldValue('TEXT') || "";
+
+  //const code = `${function_name}()`;
+  return ["", Order.ATOMIC];
+}
+
+htmlGenerator.forBlock['scripts_setqueryselector'] = function(block, generator) {
+  //const function_name = block.getFieldValue('TEXT') || "";
+
+  //const code = `${function_name}()`;
+  return "";
+}
+
 /*
 Blockly.JavaScript['elements_on'] = function(block) {
   // Get the selected event type from the dropdown
