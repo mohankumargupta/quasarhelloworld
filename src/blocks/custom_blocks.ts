@@ -1,5 +1,27 @@
 import * as Blockly from 'blockly/core';
 
+Blockly.Blocks['input_prompt'] = {
+  init: function() {
+    this.jsonInit({
+"type": "input_prompt",
+"message0": "prompt with message %1",
+"args0": [
+    {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+    }
+],
+"inputsInline": true,
+"previousStatement": null,
+"nextStatement": null,
+"colour": "%{BKY_LOOPS_HUE}"
+
+
+    });
+    }
+}
+
 
 Blockly.Blocks['output_alert'] = {
   init: function() {

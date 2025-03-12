@@ -281,6 +281,10 @@ import BlocklyComponent from './BlocklyComponent.vue';
       <block type="functions_def"></block>
       <block type="functions_call"></block>
     </category>
+    <category name="Input" colour="%{BKY_LOOPS_HUE}">
+      <!-- <block type="text_print"></block> -->
+       <block type="input_prompt"></block>
+    </category>
     <!-- <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE"></category> -->
     <category name="Output" colour="rgb(144, 0, 144)">
       <!-- <block type="text_print"></block> -->

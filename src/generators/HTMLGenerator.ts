@@ -165,6 +165,19 @@ htmlGenerator.forBlock['output_alert'] = function(block, generator) {
     return code;
 }
 
+htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
+  const textValue = javascriptGenerator.valueToCode(block, 'TEXT', Order.ATOMIC) || "";
+  let code = `prompt(${textValue});\n`
+
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (nextBlock) {
+    // Recursively generate code for the next block
+    const nextCode = generator.blockToCode(nextBlock);
+    code += nextCode; // Append the generated code for the next block
+  }
+
+  return code;
+}
 
 htmlGenerator.forBlock['elements_script'] = function(block, generator) {
     const innerHTMLContent = generator.statementToCode(block, 'STATEMENTS') || "";
