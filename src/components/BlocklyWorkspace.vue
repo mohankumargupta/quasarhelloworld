@@ -283,7 +283,8 @@ import BlocklyComponent from './BlocklyComponent.vue';
     </category>
     <!-- <category name="Functions" categorystyle="procedure_category" custom="PROCEDURE"></category> -->
     <category name="Output" colour="rgb(144, 0, 144)">
-      <block type="text_print"></block>
+      <!-- <block type="text_print"></block> -->
+       <block type="output_alert"></block>
     </category>
     <category name="Elements" colour="rgb(0, 191, 186)">
       <block type="elements_element_textcontent"></block>

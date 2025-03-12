@@ -1,5 +1,27 @@
 import * as Blockly from 'blockly/core';
 
+
+Blockly.Blocks['output_alert'] = {
+  init: function() {
+    this.jsonInit({
+"type": "output_alert",
+"message0": "alert with message %1",
+"args0": [
+    {
+        "type": "input_value",
+        "name": "TEXT",
+        "check": "String"
+    }
+],
+"inputsInline": true,
+"previousStatement": null,
+"nextStatement": null,
+"colour": "rgb(144, 0, 144)"
+});
+}
+}
+
+
 Blockly.Blocks['elements_script'] = {
   init: function() {
     this.jsonInit({
