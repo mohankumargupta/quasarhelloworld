@@ -46,6 +46,7 @@ onMounted(() => {
             colour: '#ccc',
             snap: true,
           };
+
   workspace.value = Blockly.inject(blocklyDiv.value, {grid, toolbox, zoom});
 
 
@@ -69,12 +70,47 @@ function updateCode(event: Blockly.Events.Abstract) {
 
 workspace.value.addChangeListener(updateCode);
 
+var blocklyArea = document.getElementById('blockly1');
+var blocklyDivDiv = document.getElementById('blocklyDiv');
+
+const onresize = function (_e: UIEvent) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+          if (element) {
+            x += element.offsetLeft;
+            y += element.offsetTop;
+            element = element.offsetParent as HTMLElement;
+          }
+        } while (element);
+        if (blocklyDivDiv && blocklyArea) {
+        // Position blocklyDiv over blocklyArea.
+         blocklyDivDiv.style.left = x + 'px';
+          //blocklyDivDiv.style.top = y + 'px';
+        //blocklyDivDiv.style.left = "0px";
+        blocklyDivDiv.style.top = "0px";
+        blocklyDivDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDivDiv.style.height = blocklyArea.offsetHeight + 'px';
+        }
+
+
+        Blockly.svgResize(workspace.value);
+
+        console.log('resize');
+      };
+  window.addEventListener('resize', onresize, false);
+  onresize(new Event('resize') as UIEvent);
+
 });
 </script>
 
 <template>
   <div>
+    <div id="blocklyArea"></div>
     <div
+      id="blocklyDiv"
       ref="blocklyDiv"
       class="blocklyDiv"
     />
@@ -89,13 +125,19 @@ workspace.value.addChangeListener(updateCode);
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
 .blocklyDiv {
+  position: absolute;
+  text-align: left;
+}
+/* .blocklyDiv {
   height: 100%;
   width: 100%;
   text-align: left;
-}
+} */
 
 .blocklyToolboxDiv {
-  padding-left: 0.25rem;
+  padding-left: 0.25em;
 }
+
 </style>
