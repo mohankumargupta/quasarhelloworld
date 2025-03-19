@@ -19,6 +19,7 @@
     "@codemirror/lang-javascript": "^6.2.3",
     "@quasar/extras": "^1.16.17",
     "@stackblitz/sdk": "^1.11.0",
+    "@vueuse/core": "^13.0.0",
     "blockly": "^11.2.1",
     "codemirror": "^6.0.1",
     "js-beautify": "^1.15.4",

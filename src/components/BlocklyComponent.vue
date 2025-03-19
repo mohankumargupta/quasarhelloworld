@@ -10,7 +10,7 @@
  * @author dcoodien@gmail.com (Dylan Coodien)
  */
 
-import {onMounted, ref, shallowRef} from 'vue';
+import {onMounted, provide, ref, shallowRef} from 'vue';
 import * as Blockly from 'blockly/core';
 import * as En from 'blockly/msg/en';
 import 'blockly/blocks';
@@ -18,6 +18,7 @@ import 'blockly/blocks';
 import { htmlGenerator } from '../generators/HTMLGenerator';
 import '../blocks/custom_blocks';
 import { state } from '../stores/codeStore';
+import eventBus from './resize';
 
 //const props = defineProps(['options']);
 const blocklyToolbox = ref();
@@ -27,11 +28,12 @@ const workspace = shallowRef();
 
 defineExpose({workspace});
 
+
 //const blocklyCode = defineModel<string>();
 
 onMounted(() => {
 
-  Blockly.setLocale(En); //eslint-disable-line
+  Blockly.setLocale(En);
   // const options = props.options || {};
   // if (!options.toolbox) {
   //   options.toolbox = blocklyToolbox.value;
@@ -103,6 +105,10 @@ const onresize = function (_e: UIEvent) {
   window.addEventListener('resize', onresize, false);
   onresize(new Event('resize') as UIEvent);
 
+
+  eventBus.on((_listener)=>{
+    onresize(new Event('resize') as UIEvent);
+  });
 });
 </script>
 
