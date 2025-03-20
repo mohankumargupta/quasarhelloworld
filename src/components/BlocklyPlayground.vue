@@ -3,7 +3,7 @@
 import { ref } from 'vue';
 import CodeViewer from './CodeViewer.vue';
 import BlocklyWorkspace from './BlocklyWorkspace.vue';
-import eventBus from './resize';
+import eventBus, {playgroundEventBus} from './resize';
 //import { onresizeKey } from '../types/resize'
 //import { state } from '../stores/codeStore';
 
@@ -15,6 +15,11 @@ function onUpdatemodelValue(value: number) {
   eventBus.emit('resize');
 }
 
+playgroundEventBus.on((listener) => {
+  splitterModel.value = listener as number;
+  setTimeout(()=> {eventBus.emit('resize');}, 100);
+});
+
 </script>
 
 <template>
@@ -22,6 +27,7 @@ function onUpdatemodelValue(value: number) {
     v-model="splitterModel"
     @update:model-value="onUpdatemodelValue"
      class="full-width flex"
+     :limits="[0,100]"
   >
     <template #before>
 

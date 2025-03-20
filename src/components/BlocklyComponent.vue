@@ -100,7 +100,7 @@ const onresize = function (_e: UIEvent) {
 
         Blockly.svgResize(workspace.value);
 
-        console.log('resize');
+        //console.log('resize');
       };
   window.addEventListener('resize', onresize, false);
   onresize(new Event('resize') as UIEvent);
