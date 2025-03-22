@@ -1,6 +1,8 @@
 <script setup lang="ts">
-//import { ref } from 'vue';
+import { ref } from 'vue';
 import { playgroundEventBus } from '../components/resize';
+const editorToggle = ref('both');
+
 function runCode() {
   console.log('Running code');
 }
@@ -15,6 +17,17 @@ function fullCode() {
 
 function defaultView() {
   playgroundEventBus.emit(50);
+}
+
+function changeToggle(value: string) {
+  if (value === 'blocks') {
+    fullBlocks();
+  } else if (value === 'code') {
+    fullCode();
+  } else {
+    defaultView();
+  }
+  editorToggle.value = value;
 }
 
 
@@ -44,9 +57,24 @@ function defaultView() {
           aria-label="Play"
           @click="runCode"
           />
-        <span class="q-mr-md"><q-btn @click="fullBlocks">BLOCKS</q-btn></span>
+<!--
+          <span class="q-mr-md"><q-btn @click="fullBlocks">BLOCKS</q-btn></span>
         <span class="q-mr-md"><q-btn @click="fullCode">CODE</q-btn></span>
         <span><q-btn @click="defaultView">BOTH</q-btn></span>
+-->
+<div class="q-pa-md">
+  <q-btn-toggle
+      v-model="editorToggle"
+      @update:model-value="changeToggle"
+      toggle-color="secondary"
+      flat
+      :options="[
+        {label: 'BLOCKS', value: 'blocks'},
+        {label: 'CODE', value: 'code'},
+        {label: 'BOTH', value: 'both'}
+      ]"/>
+
+</div>
       </q-toolbar>
     </q-header>
     <q-page-container class="full-height flex flex-col">
