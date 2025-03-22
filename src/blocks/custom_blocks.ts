@@ -63,6 +63,29 @@ Blockly.Blocks['elements_script'] = {
   }
 }
 
+Blockly.Blocks['elements_simple_textcontent'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_simple_textcontent",
+      "message0": "%1 element with text content \" %2 \"",
+      "args0": [
+          {
+              "type": "field_input",
+              "name": "TAG"
+          },
+          {
+              "type": "field_input",
+              "name": "TEXT"
+          }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+    });
+  }
+}
+
+
 Blockly.Blocks['elements_element_textcontent'] = {
   init: function() {
     this.jsonInit({

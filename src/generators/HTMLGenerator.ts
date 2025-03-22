@@ -186,6 +186,20 @@ htmlGenerator.forBlock['functions_def'] = function(block, generator) {
   return code;
 }
 
+htmlGenerator.forBlock['elements_simple_textcontent'] = function(block, generator) {
+  const tag = block.getFieldValue('TAG') || "";
+  const textContent = block.getFieldValue('TEXT')|| "";
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
+  if (nextBlock) {
+      nextCode  = generator.blockToCode(nextBlock) as string;
+  }
+  const code = `<${tag}>${textContent}</${tag}>\n`;
+  const finalCode = generateNextCodeBlock(block, generator, code);
+  return finalCode;
+}
+
+
 htmlGenerator.forBlock['elements_element_textcontent'] = function(block, generator) {
   const tag = block.getFieldValue('TAG') || "";
   const textContent = block.getFieldValue('TEXT')|| "";
