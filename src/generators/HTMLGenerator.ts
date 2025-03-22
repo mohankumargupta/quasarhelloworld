@@ -215,8 +215,9 @@ htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator
 
   const attributeName = options[attributeItem];
 
-  const code = `${attributeName}="${attributeValue}"`
-  return code;
+  const code = `${attributeName}="${attributeValue}" `
+  const finalCode = generateNextCodeBlock(block, generator, code);
+  return finalCode;
 }
 
 htmlGenerator.forBlock['functions_call'] = function(block, generator) {
@@ -289,11 +290,12 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
 
 function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code: string) {
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let newCode=code;
   if (nextBlock) {
     // Recursively generate code for the next block
     const nextCode = generator.blockToCode(nextBlock);
-    code += nextCode; // Append the generated code for the next block
+    newCode += nextCode; // Append the generated code for the next block
   }
-  return code ;
+  return newCode ;
 }
 
