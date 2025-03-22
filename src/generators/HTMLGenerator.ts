@@ -1,6 +1,7 @@
 //import * as Blockly from 'blockly/core';
 import { Names, Workspace, Generator } from 'blockly/core';
 import { Order, javascriptGenerator } from 'blockly/javascript';
+import type { Block } from 'blockly/core';
 
 class HTMLGeneratorClass extends Generator {
   constructor() {
@@ -154,15 +155,8 @@ for (const block of standard_blocks) {
 htmlGenerator.forBlock['output_alert'] = function(block, generator) {
     const textValue = javascriptGenerator.valueToCode(block, 'TEXT', Order.ATOMIC) || "";
     let code = `alert(${textValue});\n`
-
-    const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-    if (nextBlock) {
-      // Recursively generate code for the next block
-      const nextCode = generator.blockToCode(nextBlock);
-      code += nextCode; // Append the generated code for the next block
-    }
-
-    return code;
+    const finalCode = generateNextCodeBlock(block, generator, code);
+    return finalCode;
 }
 
 htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
@@ -291,5 +285,15 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
 
 
   return code;
+}
+
+function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code: string) {
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  if (nextBlock) {
+    // Recursively generate code for the next block
+    const nextCode = generator.blockToCode(nextBlock);
+    code += nextCode; // Append the generated code for the next block
+  }
+  return code ;
 }
 
