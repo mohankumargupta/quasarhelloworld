@@ -205,6 +205,26 @@ htmlGenerator.forBlock['elements_element_textcontent'] = function(block, generat
   return code;
 }
 
+htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator) {
+  const attributeItem = block.getFieldValue('FIELDNAME') as keyof typeof options;
+  const attributeValue = block.getFieldValue('VALUE');
+
+  const options = {
+    ITEM1: "id",
+    ITEM2: "class",
+    ITEM3: "style",
+    ITEM4: "src",
+    ITEM5: "href",
+    ITEM6: "alt",
+    ITEM7: "title",
+  } as const;
+
+  const attributeName = options[attributeItem];
+
+  const code = `${attributeName}="${attributeValue}"`
+  return code;
+}
+
 htmlGenerator.forBlock['functions_call'] = function(block, generator) {
   const function_name = block.getFieldValue('TEXT') || "";
 

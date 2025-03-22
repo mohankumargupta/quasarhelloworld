@@ -93,6 +93,39 @@ Blockly.Blocks['elements_element_textcontent'] = {
   }
 }
 
+
+Blockly.Blocks['elements_attributes_common'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_attributes_common",
+      "message0": '%1 is "%2"',
+      "args0": [
+        //first field is dropdown, second field is input
+          {
+              "type": "field_dropdown",
+              "name": "FIELDNAME",
+              "options": [
+                  ["id", "ITEM1"],
+                  ["class", "ITEM2"],
+                  ["style", "ITEM3"],
+                  ["src", "ITEM4"],
+                  ["href", "ITEM5"],
+                  ["alt", "ITEM6"],
+                  ["title", "ITEM7"],
+                ]
+          },{
+              "type": "field_input",
+              "name": "VALUE",
+              "check": "String"
+          }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(254, 214, 81)"
+    });
+  }
+}
+
 Blockly.Blocks['elements_on'] = {
   init: function() {
     this.jsonInit({
