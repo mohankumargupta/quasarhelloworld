@@ -236,10 +236,16 @@ htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator
 
 htmlGenerator.forBlock['elements_img_src'] = function(block, generator) {
 
-  const srcField: string = block.getFieldValue("VALUE");
-  const filename = srcField.toLowerCase().replaceAll("_","-");
-
-  const src = `https://mohankumargupta.github.io/quasarhelloworld/images/${filename}.png`;
+  type OPTIONS = keyof typeof options;
+  const srcField: OPTIONS = block.getFieldValue("VALUE");
+  const options = {
+    "ANZAC": "anzac",
+    "BISCOTTI": "biscotti",
+    "BUTTERCHOC": "butter-cookie-choc",
+    "MINICOOKIEBITE": ""
+  };
+  const filename = `${options[srcField]}.png`;
+  const src = `https://mohankumargupta.github.io/quasarhelloworld/images/${filename}`;
 
   const code = `<img src="${src}" />`
   const finalCode = generateNextCodeBlock(block, generator, code);
