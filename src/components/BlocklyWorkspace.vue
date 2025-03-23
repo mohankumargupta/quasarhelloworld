@@ -293,10 +293,10 @@ import BlocklyComponent from './BlocklyComponent.vue';
     <category name="Elements" colour="rgb(0, 191, 186)">
       <block type="elements_simple_textcontent"></block>
       <block type="elements_element_textcontent"></block>
+      <block type="elements_img_src"></block>
       <block type="elements_script"></block>
       <block type="elements_on"></block>
       <block type="elements_attributes_common"></block>
-      <block type="elements_src_is"></block>
     </category>
     <category name="Scripts" colour="rgb(187, 102, 202)">
       <block type="scripts_setqueryselector"></block>

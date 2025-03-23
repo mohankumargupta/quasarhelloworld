@@ -177,11 +177,11 @@ Blockly.Blocks['elements_on'] = {
   }
 }
 
-Blockly.Blocks['elements_src_is'] = {
+Blockly.Blocks['elements_img_src'] = {
   init: function() {
     this.jsonInit({
-      "type": "elements_src_is",
-      "message0": "src is %1",
+      "type": "elements_img_src",
+      "message0": "img element with src equal to %1",
       "args0": [{
         "type": "field_dropdown",
         "name": "VALUE",
@@ -221,7 +221,7 @@ Blockly.Blocks['elements_src_is'] = {
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "colour": "rgb(254, 214, 81)"
+      "colour": "rgb(0, 191, 186)"
     });
   }
 }

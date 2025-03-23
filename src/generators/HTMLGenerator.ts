@@ -234,6 +234,18 @@ htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator
   return finalCode;
 }
 
+htmlGenerator.forBlock['elements_img_src'] = function(block, generator) {
+
+  const srcField: string = block.getFieldValue("VALUE");
+  const filename = srcField.toLowerCase().replaceAll("_","-");
+
+  const src = `https://mohankumargupta.github.io/quasarhelloworld/images/${filename}.png`;
+
+  const code = `<img src="${src}" />`
+  const finalCode = generateNextCodeBlock(block, generator, code);
+  return finalCode;
+}
+
 htmlGenerator.forBlock['functions_call'] = function(block, generator) {
   const function_name = block.getFieldValue('TEXT') || "";
 
