@@ -173,6 +173,23 @@ htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
   return code;
 }
 
+htmlGenerator.forBlock['elements_attributes_content_dropdown'] = function(block, generator) {
+  const tagField: keyof typeof options = block.getFieldValue("TAG")||"";
+  const options = {
+    ITEM1: "p",
+    ITEM2: "h1",
+    ITEM3: "h2",
+    ITEM4: "h3",
+    ITEM5: "div",
+    ITEM6: "span",
+  };
+  const tag = options[tagField];
+  const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";
+  const content = generator.statementToCode(block, 'CONTENT') || "";
+  const code = `<${tag}${attributes}>\n${content}<\/${tag}>`;
+  return code;
+}
+
 htmlGenerator.forBlock['elements_attributes_content'] = function(block, generator) {
   const tag: string = block.getFieldValue("TAG")||"";
   const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";

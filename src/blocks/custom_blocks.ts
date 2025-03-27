@@ -43,6 +43,47 @@ Blockly.Blocks['output_alert'] = {
 }
 }
 
+Blockly.Blocks['elements_attributes_content_dropdown'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_attributes_content_dropdown",
+      "message0": "%1 element",
+      "message1": "attributes %1",
+      "message2": "content %1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "TAG",
+          "options": [
+            ["p", "ITEM1"],
+            ["h1", "ITEM2"],
+            ["h2", "ITEM3"],
+            ["h3", "ITEM4"],
+            ["div", "ITEM5"],
+            ["span", "ITEM6"],
+          ],
+        },
+      ],
+      "args1": [
+          {
+            "type": "input_statement",
+            "name": "ATTRIBUTES"
+          }
+      ],
+      "args2": [
+        {
+          "type": "input_statement",
+          "name": "CONTENT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+    });
+  }
+};
+
+
 Blockly.Blocks['elements_attributes_content'] = {
   init: function() {
     this.jsonInit({

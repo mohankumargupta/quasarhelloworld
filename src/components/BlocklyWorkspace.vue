@@ -291,6 +291,7 @@ import BlocklyComponent from './BlocklyComponent.vue';
        <block type="output_alert"></block>
     </category>
     <category name="Elements" colour="rgb(0, 191, 186)">
+      <block type="elements_attributes_content_dropdown"></block>
       <block type="elements_attributes_content"></block>
       <block type="elements_simple_textcontent"></block>
       <block type="elements_element_textcontent"></block>
