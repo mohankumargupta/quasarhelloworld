@@ -173,6 +173,14 @@ htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
   return code;
 }
 
+htmlGenerator.forBlock['elements_attributes_content'] = function(block, generator) {
+  const tag: string = block.getFieldValue("TAG")||"";
+  const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";
+  const content = generator.statementToCode(block, 'CONTENT') || "";
+  const code = `<${tag}${attributes}>\n${content}<\/${tag}>`;
+  return code;
+}
+
 htmlGenerator.forBlock['elements_script'] = function(block, generator) {
     const innerHTMLContent = generator.statementToCode(block, 'STATEMENTS') || "";
     const code = `<script>\n${innerHTMLContent}<\/script>`;
