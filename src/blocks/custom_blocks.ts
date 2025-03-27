@@ -43,6 +43,32 @@ Blockly.Blocks['output_alert'] = {
 }
 }
 
+Blockly.Blocks['elements_content'] = {
+  init: function() {
+    this.jsonInit({
+      "type": "elements_content",
+      "message0": "%1 element",
+      "message1": "content %1",
+      "args0": [
+        {
+          "type": "field_input",
+          "name": "TAG"
+        },
+      ],
+      "args1": [
+        {
+          "type": "input_statement",
+          "name": "CONTENT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": "rgb(0, 191, 186)"
+    });
+  }
+
+};
+
 Blockly.Blocks['elements_attributes_content_dropdown'] = {
   init: function() {
     this.jsonInit({
