@@ -182,6 +182,20 @@ htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
   return code;
 }
 
+htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block, generator) {
+  const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
+  const tag = tag_options[tagField];
+  const textContent = block.getFieldValue('TEXT')|| "";
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
+  if (nextBlock) {
+      nextCode  = generator.blockToCode(nextBlock) as string;
+  }
+  const code = `<${tag}>${textContent}</${tag}>\n`;
+  const finalCode = generateNextCodeBlock(block, generator, code);
+  return finalCode;
+}
+
 htmlGenerator.forBlock['elements_attributes_content_dropdown'] = function(block, generator) {
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];

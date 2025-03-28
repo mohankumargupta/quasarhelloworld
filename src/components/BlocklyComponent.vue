@@ -66,7 +66,7 @@ function updateCode(event: Blockly.Events.Abstract) {
   const code = htmlGenerator.workspaceToCode(workspace.value);
   state.blocklyCode = code;
   //blocklyCode.value = code;
-  console.log(code);
+  //console.log(code);
 
 }
 
