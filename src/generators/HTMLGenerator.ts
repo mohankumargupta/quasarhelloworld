@@ -144,6 +144,15 @@ const standard_blocks = [
     "controls_flow_statements",
 ];
 
+const tag_options = {
+  ITEM1: "p",
+  ITEM2: "h1",
+  ITEM3: "h2",
+  ITEM4: "h3",
+  ITEM5: "div",
+  ITEM6: "span",
+  ITEM7: "button"
+};
 
 for (const block of standard_blocks) {
   const forblock = javascriptGenerator.forBlock[block];
@@ -174,16 +183,8 @@ htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
 }
 
 htmlGenerator.forBlock['elements_attributes_content_dropdown'] = function(block, generator) {
-  const tagField: keyof typeof options = block.getFieldValue("TAG")||"";
-  const options = {
-    ITEM1: "p",
-    ITEM2: "h1",
-    ITEM3: "h2",
-    ITEM4: "h3",
-    ITEM5: "div",
-    ITEM6: "span",
-  };
-  const tag = options[tagField];
+  const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
+  const tag = tag_options[tagField];
   const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";
   const content = generator.statementToCode(block, 'CONTENT') || "";
   const code = `<${tag}${attributes}>\n${content}<\/${tag}>`;

@@ -1,5 +1,15 @@
 import * as Blockly from 'blockly/core';
 
+const tag_options = [
+  ["p", "ITEM1"],
+  ["h1", "ITEM2"],
+  ["h2", "ITEM3"],
+  ["h3", "ITEM4"],
+  ["div", "ITEM5"],
+  ["span", "ITEM6"],
+  ["button", "ITEM7"],
+];
+
 Blockly.Blocks['input_prompt'] = {
   init: function() {
     this.jsonInit({
@@ -80,14 +90,7 @@ Blockly.Blocks['elements_attributes_content_dropdown'] = {
         {
           "type": "field_dropdown",
           "name": "TAG",
-          "options": [
-            ["p", "ITEM1"],
-            ["h1", "ITEM2"],
-            ["h2", "ITEM3"],
-            ["h3", "ITEM4"],
-            ["div", "ITEM5"],
-            ["span", "ITEM6"],
-          ],
+          "options": tag_options,
         },
       ],
       "args1": [
