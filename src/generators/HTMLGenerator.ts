@@ -394,10 +394,8 @@ function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code
   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   let newCode=code;
   if (nextBlock) {
-    // Recursively generate code for the next block
     const nextCode = generator.blockToCode(nextBlock) as string;
     newCode = newCode.replace("{}", nextCode);
-    //newCode += nextCode; // Append the generated code for the next block
   }
   else {
     newCode = newCode.replace("{}","");
@@ -410,8 +408,6 @@ function handleNextBlocks() {
   const statementKeys = Object.keys(htmlGenerator.forBlock).filter(key => key.startsWith('_'));
   for (const statementKey of statementKeys) {
     const statementIndex = statementKey.replace(/^_/, '');
-    console.log(statementKey);
-    console.log(statementIndex);
     htmlGenerator.forBlock[statementIndex] = function (block, generator) {
       if (htmlGenerator.forBlock[statementKey]) {
         const simpleCode = htmlGenerator.forBlock[statementKey](block, generator) as string;
