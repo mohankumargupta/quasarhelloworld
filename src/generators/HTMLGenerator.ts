@@ -73,6 +73,11 @@ class HTMLGeneratorClass extends Generator {
 
 }
 
+function valueToCode(block: Block, generator: HTMLGeneratorClass, name: string) {
+  const text  = generator.valueToCode(block, name, 0)||"";
+  return text.slice(1,-1);
+}
+
 export const htmlGenerator = new HTMLGeneratorClass();
 //let htmlGenerator = new Blockly.Generator('HTML');
 htmlGenerator['forBlock'] = {};
@@ -213,7 +218,8 @@ htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block,
 
 htmlGenerator.forBlock['elements_button'] = function(block, generator) {
   const attributes = generator.statementToCode(block, 'ATTRIBUTE') || "";
-  const text: string = block.getFieldValue("TEXT")||"";
+  const text = valueToCode(block, generator, "TEXT");
+  //const text  = generator.valueToCode(block, "TEXT", 0)||"";
   const code = `<button${attributes}>${text}</button>`;
   return code;
 }
