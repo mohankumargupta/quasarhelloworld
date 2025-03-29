@@ -18,8 +18,10 @@ function stackblitz(evt: Event) {
   sdk.openProject({
  files: {
   'index.html': fullHTMLCode.value,
-  'index.css': 'body { background-color: #f0f; }',
-  'index.js': 'console.log("Hello from JavaScript");'
+  'index.css': 'body {\n background-color: white;\n}\n',
+  'index.js': `//Ignore this. Needed for index.css
+//to be applied inside stackblitz platform.\n
+import './index.css';\nconsole.log("Hello from JavaScript");\n`
  },
  template: 'javascript',
  title: 'Blockly Code',

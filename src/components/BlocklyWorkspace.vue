@@ -291,20 +291,20 @@ import BlocklyComponent from './BlocklyComponent.vue';
        <block type="output_alert"></block>
     </category>
     <category name="Elements" colour="rgb(0, 191, 186)">
+      <block type="elements_script"></block>
       <block type="elements_simple_textcontent_dropdown"></block>
       <block type="elements_img_src"></block>
       <block type="elements_button">
         <statement name="ATTRIBUTE"><block type="elements_on"></block></statement>
         <value name="TEXT"><block type="text"></block></value>
       </block>
+      <block type="elements_attributes_common"></block>
       <block type="elements_attributes_content_dropdown"></block>
       <block type="elements_attributes_content"></block>
       <block type="elements_content"></block>
       <block type="elements_simple_textcontent"></block>
       <block type="elements_element_textcontent"></block>
-      <block type="elements_script"></block>
       <block type="elements_on"></block>
-      <block type="elements_attributes_common"></block>
     </category>
     <category name="Scripts" colour="rgb(187, 102, 202)">
       <block type="scripts_setqueryselector"></block>
