@@ -191,30 +191,24 @@ htmlGenerator.forBlock['_elements_simple_textcontent_dropdown'] = function(block
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];
   const textContent = block.getFieldValue('TEXT')|| "";
-  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  let nextCode = '';
-  if (nextBlock) {
-      nextCode  = generator.blockToCode(nextBlock) as string;
-  }
-  const code = `<${tag}>${textContent}</${tag}>\n`;
-  const finalCode = generateNextCodeBlock(block, generator, code);
-  return finalCode;
+  const code = `<${tag}>${textContent}</${tag}>\n{}`;
+  return code;
 }
 
 
-htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block, generator) {
-  const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
-  const tag = tag_options[tagField];
-  const textContent = block.getFieldValue('TEXT')|| "";
-  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  let nextCode = '';
-  if (nextBlock) {
-      nextCode  = generator.blockToCode(nextBlock) as string;
-  }
-  const code = `<${tag}>${textContent}</${tag}>\n`;
-  const finalCode = generateNextCodeBlock(block, generator, code);
-  return finalCode;
-}
+// htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block, generator) {
+//   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
+//   const tag = tag_options[tagField];
+//   const textContent = block.getFieldValue('TEXT')|| "";
+//   const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+//   let nextCode = '';
+//   if (nextBlock) {
+//       nextCode  = generator.blockToCode(nextBlock) as string;
+//   }
+//   const code = `<${tag}>${textContent}</${tag}>\n`;
+//   const finalCode = generateNextCodeBlock(block, generator, code);
+//   return finalCode;
+// }
 
 htmlGenerator.forBlock['elements_button'] = function(block, generator) {
   const attributes = generator.statementToCode(block, 'ATTRIBUTE') || "";
@@ -401,11 +395,36 @@ function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code
   let newCode=code;
   if (nextBlock) {
     // Recursively generate code for the next block
-    const nextCode = generator.blockToCode(nextBlock);
-    newCode += nextCode; // Append the generated code for the next block
+    const nextCode = generator.blockToCode(nextBlock) as string;
+    newCode = newCode.replace("{}", nextCode);
+    //newCode += nextCode; // Append the generated code for the next block
+  }
+  else {
+    newCode = newCode.replace("{}","");
   }
   return newCode ;
 }
+
+(
+function handleNextBlocks() {
+  const statementKeys = Object.keys(htmlGenerator.forBlock).filter(key => key.startsWith('_'));
+  for (const statementKey of statementKeys) {
+    const statementIndex = statementKey.replace(/^_/, '');
+    console.log(statementKey);
+    console.log(statementIndex);
+    htmlGenerator.forBlock[statementIndex] = function (block, generator) {
+      if (htmlGenerator.forBlock[statementKey]) {
+        const simpleCode = htmlGenerator.forBlock[statementKey](block, generator) as string;
+        const code = generateNextCodeBlock(block, generator, simpleCode);
+        return code;
+        //return simpleCode !== undefined ? simpleCode : null;
+      }
+      return null;
+    };
+
+  }
+}
+)();
 
 /*
 const statementKeys = Object.keys(htmlGenerator.forBlock).filter(key => key.startsWith('_'));
