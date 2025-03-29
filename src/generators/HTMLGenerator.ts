@@ -413,7 +413,6 @@ function handleNextBlocks() {
         const simpleCode = htmlGenerator.forBlock[statementKey](block, generator) as string;
         const code = generateNextCodeBlock(block, generator, simpleCode);
         return code;
-        //return simpleCode !== undefined ? simpleCode : null;
       }
       return null;
     };
