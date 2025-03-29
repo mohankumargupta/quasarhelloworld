@@ -206,41 +206,42 @@ htmlGenerator.forBlock['_elements_simple_textcontent_dropdown'] = function(block
 //   return finalCode;
 // }
 
-htmlGenerator.forBlock['elements_button'] = function(block, generator) {
+
+htmlGenerator.forBlock['_elements_button'] = function(block, generator) {
   const attributes = generator.statementToCode(block, 'ATTRIBUTE') || "";
   const text = valueToCode(block, generator, "TEXT");
-  const code = `<button${attributes}>${text}</button>`;
+  const code = `<button${attributes}>${text}</button>\n`;
   return code;
 }
 
 
-htmlGenerator.forBlock['elements_attributes_content_dropdown'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_attributes_content_dropdown'] = function(block, generator) {
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];
   const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";
   const content = generator.statementToCode(block, 'CONTENT') || "";
-  const code = `<${tag}${attributes}>\n${content}<\/${tag}>`;
+  const code = `<${tag}${attributes}>\n${content}<\/${tag}>\n`;
   return code;
 }
 
-htmlGenerator.forBlock['elements_attributes_content'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_attributes_content'] = function(block, generator) {
   const tag: string = block.getFieldValue("TAG")||"";
   const attributes = generator.statementToCode(block, 'ATTRIBUTES') || "";
   const content = generator.statementToCode(block, 'CONTENT') || "";
-  const code = `<${tag}${attributes}>\n${content}<\/${tag}>`;
+  const code = `<${tag}${attributes}>\n${content}<\/${tag}>\n`;
   return code;
 }
 
-htmlGenerator.forBlock['elements_content'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_content'] = function(block, generator) {
   const tag: string = block.getFieldValue("TAG")||"";
   const content = generator.statementToCode(block, 'CONTENT') || "";
-  const code = `<${tag}>\n${content}<\/${tag}>`;
+  const code = `<${tag}>\n${content}<\/${tag}>\n`;
   return code;
 }
 
-htmlGenerator.forBlock['elements_script'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_script'] = function(block, generator) {
     const innerHTMLContent = generator.statementToCode(block, 'STATEMENTS') || "";
-    const code = `<script>\n${innerHTMLContent}<\/script>`;
+    const code = `<script>\n${innerHTMLContent}<\/script>\n`;
     return code;
 }
 
@@ -251,34 +252,23 @@ htmlGenerator.forBlock['functions_def'] = function(block, generator) {
   return code;
 }
 
-htmlGenerator.forBlock['elements_simple_textcontent'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_simple_textcontent'] = function(block, generator) {
   const tag = block.getFieldValue('TAG') || "";
   const textContent = block.getFieldValue('TEXT')|| "";
-  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  let nextCode = '';
-  if (nextBlock) {
-      nextCode  = generator.blockToCode(nextBlock) as string;
-  }
   const code = `<${tag}>${textContent}</${tag}>\n`;
-  const finalCode = generateNextCodeBlock(block, generator, code);
-  return finalCode;
+  return code;
 }
 
 
-htmlGenerator.forBlock['elements_element_textcontent'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_element_textcontent'] = function(block, generator) {
   const tag = block.getFieldValue('TAG') || "";
   const textContent = block.getFieldValue('TEXT')|| "";
   const actionCode = generator.statementToCode(block,'STATEMENT') || '';
-  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  let nextCode = '';
-  if (nextBlock) {
-      nextCode  = generator.blockToCode(nextBlock) as string;
-  }
   const code = `<${tag}${actionCode}>${textContent}</${tag}>\n`;
   return code;
 }
 
-htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_attributes_common'] = function(block, generator) {
   const attributeItem = block.getFieldValue('FIELDNAME') as keyof typeof options;
   const attributeValue = block.getFieldValue('VALUE');
 
@@ -294,12 +284,11 @@ htmlGenerator.forBlock['elements_attributes_common'] = function(block, generator
 
   const attributeName = options[attributeItem];
 
-  const code = `${attributeName}="${attributeValue}" `
-  const finalCode = generateNextCodeBlock(block, generator, code);
-  return finalCode;
+  const code = `${attributeName}="${attributeValue}" `;
+  return code;
 }
 
-htmlGenerator.forBlock['elements_img_src'] = function(block, generator) {
+htmlGenerator.forBlock['_elements_img_src'] = function(block, generator) {
 
   type OPTIONS = keyof typeof options;
   const srcField: OPTIONS = block.getFieldValue("VALUE");
@@ -313,8 +302,7 @@ htmlGenerator.forBlock['elements_img_src'] = function(block, generator) {
   const src = `https://mohankumargupta.github.io/quasarhelloworld/images/${filename}`;
 
   const code = `<img src="${src}" />`
-  const finalCode = generateNextCodeBlock(block, generator, code);
-  return finalCode;
+  return code;
 }
 
 htmlGenerator.forBlock['functions_call'] = function(block, generator) {
