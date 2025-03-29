@@ -416,7 +416,6 @@ function handleNextBlocks() {
       }
       return null;
     };
-
   }
 }
 )();
