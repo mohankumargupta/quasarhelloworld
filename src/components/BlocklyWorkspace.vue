@@ -292,12 +292,15 @@ import BlocklyComponent from './BlocklyComponent.vue';
     </category>
     <category name="Elements" colour="rgb(0, 191, 186)">
       <block type="elements_simple_textcontent_dropdown"></block>
+      <block type="elements_img_src"></block>
+      <block type="elements_button">
+        <statement name="ATTRIBUTE"><shadow type="elements_on"></shadow></statement>
+      </block>
       <block type="elements_attributes_content_dropdown"></block>
       <block type="elements_attributes_content"></block>
       <block type="elements_content"></block>
       <block type="elements_simple_textcontent"></block>
       <block type="elements_element_textcontent"></block>
-      <block type="elements_img_src"></block>
       <block type="elements_script"></block>
       <block type="elements_on"></block>
       <block type="elements_attributes_common"></block>

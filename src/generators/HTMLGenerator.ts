@@ -182,6 +182,21 @@ htmlGenerator.forBlock['input_prompt'] = function(block, generator) {
   return code;
 }
 
+htmlGenerator.forBlock['_elements_simple_textcontent_dropdown'] = function(block, generator) {
+  const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
+  const tag = tag_options[tagField];
+  const textContent = block.getFieldValue('TEXT')|| "";
+  const nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+  let nextCode = '';
+  if (nextBlock) {
+      nextCode  = generator.blockToCode(nextBlock) as string;
+  }
+  const code = `<${tag}>${textContent}</${tag}>\n`;
+  const finalCode = generateNextCodeBlock(block, generator, code);
+  return finalCode;
+}
+
+
 htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block, generator) {
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];
@@ -378,3 +393,20 @@ function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code
   return newCode ;
 }
 
+/*
+const statementKeys = Object.keys(htmlGenerator.forBlock).filter(key => key.startsWith('_'));
+
+for (const statementKey of statementKeys) {
+  const statementIndex = statementKey.replace(/^_/, '');
+  htmlGenerator.forBlock[statementIndex] = function (block, generator) {
+    if (htmlGenerator.forBlock[statementKey]) {
+      const simpleCode = htmlGenerator.forBlock[statementKey](block, generator)
+
+      return simpleCode;
+    }
+  };
+  console.log(statementKey);
+}
+
+
+*/

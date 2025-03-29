@@ -121,6 +121,7 @@ export default defineConfig((ctx) => {
                 'value',
                 'sep',
                 'shadow',
+                'statement',
               ].includes(tag),
           },
         }
