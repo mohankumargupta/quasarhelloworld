@@ -69,8 +69,6 @@ class HTMLGeneratorClass extends Generator {
     const lines = string.split(/\n/g).map(this.quote_);
     return lines.join(" + '\\n' +\n");
   }
-
-
 }
 
 function valueToCode(block: Block, generator: HTMLGeneratorClass, name: string) {
@@ -79,10 +77,8 @@ function valueToCode(block: Block, generator: HTMLGeneratorClass, name: string) 
 }
 
 export const htmlGenerator = new HTMLGeneratorClass();
-//let htmlGenerator = new Blockly.Generator('HTML');
 htmlGenerator['forBlock'] = {};
 
-// TODO: Use example from here: https://github.com/google/blockly-samples/blob/master/examples/sample-app-ts/src/generators/javascript.ts
 const standard_blocks = [
     "lists_create_empty",
     "lists_create_with",
@@ -191,7 +187,7 @@ htmlGenerator.forBlock['_elements_simple_textcontent_dropdown'] = function(block
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];
   const textContent = block.getFieldValue('TEXT')|| "";
-  const code = `<${tag}>${textContent}</${tag}>\n{}`;
+  const code = `<${tag}>${textContent}</${tag}>\n`;
   return code;
 }
 
@@ -213,7 +209,6 @@ htmlGenerator.forBlock['_elements_simple_textcontent_dropdown'] = function(block
 htmlGenerator.forBlock['elements_button'] = function(block, generator) {
   const attributes = generator.statementToCode(block, 'ATTRIBUTE') || "";
   const text = valueToCode(block, generator, "TEXT");
-  //const text  = generator.valueToCode(block, "TEXT", 0)||"";
   const code = `<button${attributes}>${text}</button>`;
   return code;
 }
@@ -337,37 +332,8 @@ htmlGenerator.forBlock['scripts_queryselector'] = function(block, generator) {
 }
 
 htmlGenerator.forBlock['scripts_setqueryselector'] = function(block, generator) {
-  //const function_name = block.getFieldValue('TEXT') || "";
-
-  //const code = `${function_name}()`;
   return "";
 }
-
-/*
-Blockly.JavaScript['elements_on'] = function(block) {
-  // Get the selected event type from the dropdown
-  const eventName = block.getFieldValue('FIELDNAME'); // "ITEM1" (click) or "ITEM2" (double click)
-
-  // Generate code for the input value (the "do" part)
-  const actionCode = Blockly.JavaScript.valueToCode(
-    block,
-    'TEXT',
-    Blockly.JavaScript.ORDER_ATOMIC
-  ) || 'null'; // Default to 'null' if no input is provided
-
-  // Map ITEM1/ITEM2 to actual event names
-  const eventMap = {
-    'ITEM1': 'click',
-    'ITEM2': 'dblclick' // Use standard DOM event names
-  };
-  const eventType = eventMap[eventName] || 'click';
-
-  // Generate the final JavaScript code
-  const code = `element.addEventListener('${eventType}', function() {\n  ${actionCode}\n});\n`;
-
-  return code;
-};
-*/
 
 htmlGenerator.forBlock['elements_on'] = function(block, generator) {
   const eventMap = {
@@ -385,8 +351,6 @@ htmlGenerator.forBlock['elements_on'] = function(block, generator) {
       const nextCode = generator.blockToCode(nextBlock);
       code += ` ${nextCode}`; // Append the generated code for the next block
     }
-
-
   return code;
 }
 
@@ -395,10 +359,11 @@ function generateNextCodeBlock(block: Block, generator: HTMLGeneratorClass, code
   let newCode=code;
   if (nextBlock) {
     const nextCode = generator.blockToCode(nextBlock) as string;
-    newCode = newCode.replace("{}", nextCode);
+    newCode = newCode + nextCode;
+    //newCode = newCode.replace("{}", nextCode);
   }
   else {
-    newCode = newCode.replace("{}","");
+    //newCode = newCode.replace("{}","");
   }
   return newCode ;
 }
@@ -419,21 +384,3 @@ function handleNextBlocks() {
   }
 }
 )();
-
-/*
-const statementKeys = Object.keys(htmlGenerator.forBlock).filter(key => key.startsWith('_'));
-
-for (const statementKey of statementKeys) {
-  const statementIndex = statementKey.replace(/^_/, '');
-  htmlGenerator.forBlock[statementIndex] = function (block, generator) {
-    if (htmlGenerator.forBlock[statementKey]) {
-      const simpleCode = htmlGenerator.forBlock[statementKey](block, generator)
-
-      return simpleCode;
-    }
-  };
-  console.log(statementKey);
-}
-
-
-*/
