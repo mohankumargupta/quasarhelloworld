@@ -140,8 +140,9 @@ Blockly.Blocks['elements_button'] = {
       ],
       "args1": [
         {
-          "type": "field_input",
-          "name": "TEXT"
+          "type": "input_value",
+          "name": "TEXT",
+          "check": "String"
         }
       ],
       "inputsInline": true,

@@ -294,7 +294,8 @@ import BlocklyComponent from './BlocklyComponent.vue';
       <block type="elements_simple_textcontent_dropdown"></block>
       <block type="elements_img_src"></block>
       <block type="elements_button">
-        <statement name="ATTRIBUTE"><shadow type="elements_on"></shadow></statement>
+        <statement name="ATTRIBUTE"><block type="elements_on"></block></statement>
+        <value name="TEXT"><block type="text"></block></value>
       </block>
       <block type="elements_attributes_content_dropdown"></block>
       <block type="elements_attributes_content"></block>

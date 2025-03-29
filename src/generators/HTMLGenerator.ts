@@ -211,6 +211,14 @@ htmlGenerator.forBlock['elements_simple_textcontent_dropdown'] = function(block,
   return finalCode;
 }
 
+htmlGenerator.forBlock['elements_button'] = function(block, generator) {
+  const attributes = generator.statementToCode(block, 'ATTRIBUTE') || "";
+  const text: string = block.getFieldValue("TEXT")||"";
+  const code = `<button${attributes}>${text}</button>`;
+  return code;
+}
+
+
 htmlGenerator.forBlock['elements_attributes_content_dropdown'] = function(block, generator) {
   const tagField: keyof typeof tag_options = block.getFieldValue("TAG")||"";
   const tag = tag_options[tagField];
